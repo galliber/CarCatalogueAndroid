@@ -1,0 +1,96 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.wolverine.carcatalogueandroid.views.CarInfo.CarInfoFragment">
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/tv_make"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="kure"
+            android:textColor="@color/md_blue_600"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_make"
+            android:textColor="@color/md_blue_600"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_model"
+            android:textColor="@color/md_blue_600"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_cubic_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_power"
+            android:textColor="@color/md_blue_600"
+            android:layout_marginLeft="10dp"/>
+
+        <Button
+            android:id="@+id/btn_add_to_personal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_cubic_capacity"
+            android:textColor="@color/md_red_A700"
+            android:layout_marginLeft="10dp"
+            android:background="@color/md_yellow_700"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"/>
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_delete_from_personal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btn_add_to_personal"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/tv_cubic_capacity"
+            android:textColor="@color/md_red_A700"
+            android:background="@color/md_orange_600"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btn_delete_from_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_add_to_personal"
+            android:textColor="@color/md_yellow_700"
+            android:layout_marginLeft="10dp"
+            android:background="@color/md_red_A700"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+            android:id="@+id/im_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btn_delete_from_all"
+            android:background="@color/md_black_1000"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
