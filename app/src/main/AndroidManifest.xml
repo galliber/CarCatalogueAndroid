@@ -8,14 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".views.AllCarsActivity">
+        android:theme="@style/CarStyle">
+        <activity
+            android:name=".views.MyCars.MyCarsActivity"
+            android:label="@string/title_activity_my_cars"/>
+        <activity
+            android:name=".views.AddCar.AddCarActivity"
+            android:label="@string/title_activity_add_car"/>
+        <activity
+            android:name=".views.AllCars.AllCarsActivity"
+            android:label="@string/title_activity_all_cars">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".views.CarInfo.CarInfoActivity"
+            android:label="@string/title_activity_car_info" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

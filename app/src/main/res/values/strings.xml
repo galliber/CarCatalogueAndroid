@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CarCatalogueAndroid</string>
+    <string name="title_activity_my_cars">MyCarsActivity</string>
+    <string name="title_activity_add_car">AddCarActivity</string>
+    <string name="title_activity_all_cars">AllCarsActivity</string>
+    <string name="title_activity_car_info">CarInfoActivity</string>
 </resources>
