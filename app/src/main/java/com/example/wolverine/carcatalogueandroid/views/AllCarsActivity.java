@@ -1,7 +1,9 @@
-package com.example.wolverine.carcatalogueandroid;
+package com.example.wolverine.carcatalogueandroid.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.wolverine.carcatalogueandroid.R;
 
 public class AllCarsActivity extends AppCompatActivity {
 
