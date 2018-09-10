@@ -63,7 +63,7 @@ public class OkHttpHttpRequester implements HttpRequester {
 
     @Override
     public String put(String url, String body) throws IOException {
-        RequestBody requestBody=RequestBody.create(MediaType.get("application/jso"), body);
+        RequestBody requestBody=RequestBody.create(MediaType.get("application/json"), body);
 
         Request request=new Request
                 .Builder()
