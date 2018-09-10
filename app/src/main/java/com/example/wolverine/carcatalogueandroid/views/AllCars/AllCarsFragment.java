@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.wolverine.carcatalogueandroid.R;
 import com.example.wolverine.carcatalogueandroid.models.Car;
+import com.example.wolverine.carcatalogueandroid.views.CarsArrayAdapter;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,15 +46,7 @@ public class AllCarsFragment extends Fragment implements AdapterView.OnItemClick
         View view = inflater.inflate(R.layout.fragment_all_cars, container, false);
         mCarsListView = view.findViewById(R.id.lv_cars);
         mLoadingBar = view.findViewById(R.id.loading);
-        mAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1) {
-            @Override
-            public View getView(int position, View contentView, ViewGroup viewGroup) {
-                View view1 = super.getView(position, contentView, viewGroup);
-                TextView tv = view1.findViewById(android.R.id.text1);
-                tv.setTextColor(Color.GREEN);
-                return view1;
-            }
-        };
+        mAdapter = new CarsArrayAdapter(getContext(), android.R.layout.simple_list_item_1);
         mCarsListView.setAdapter(mAdapter);
         mCarsListView.setOnItemClickListener(this);
         return view;

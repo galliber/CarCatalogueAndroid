@@ -9,6 +9,7 @@ import com.example.wolverine.carcatalogueandroid.AndroidApplication;
 import com.example.wolverine.carcatalogueandroid.R;
 import com.example.wolverine.carcatalogueandroid.models.Car;
 import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
+import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 import com.example.wolverine.carcatalogueandroid.views.BaseDrawerActivity;
 import com.example.wolverine.carcatalogueandroid.views.CarInfo.CarInfoActivity;
 
@@ -17,7 +18,7 @@ public class AllCarsActivity extends BaseDrawerActivity implements AllCarsContra
     public static final long IDENTIFIER = 0;
     private AllCarsFragment mAllCarsFragment;
     private AllCarsPresenter mPresenter;
-    private Repository<Car> mRepository;
+    private CarsService mCarsService;
 
     private Toolbar mDrawer;
 
@@ -26,8 +27,8 @@ public class AllCarsActivity extends BaseDrawerActivity implements AllCarsContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_cars);
 
-        mRepository= AndroidApplication.getCarRepository(Car.class, Car[].class);
-        mPresenter=new AllCarsPresenter(mRepository);
+        mCarsService= AndroidApplication.getCarsService();
+        mPresenter=new AllCarsPresenter(mCarsService);
         mAllCarsFragment=new AllCarsFragment();
         mAllCarsFragment.setNavigator(this);
         mAllCarsFragment.setPresenter(mPresenter);

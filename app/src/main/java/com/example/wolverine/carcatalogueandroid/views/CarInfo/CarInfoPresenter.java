@@ -3,18 +3,19 @@ package com.example.wolverine.carcatalogueandroid.views.CarInfo;
 import com.example.wolverine.carcatalogueandroid.async.AsyncRunner;
 import com.example.wolverine.carcatalogueandroid.models.Car;
 import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
+import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 
 import java.io.IOException;
 
 public class CarInfoPresenter implements CarInfoContracts.Presenter {
-    private final Repository<Car> mCarRepository;
-    private final Repository<Car> mPersonalRepository;
+    private final CarsService mCarsService;
+    private final CarsService mPresonalCarsService;
     private CarInfoContracts.View mView;
     private Car mCar;
 
-    public CarInfoPresenter(Repository repository, Repository personalRepository) {
-        mCarRepository = repository;
-        mPersonalRepository = personalRepository;
+    public CarInfoPresenter(CarsService carsService, CarsService personalRepository) {
+        mCarsService = carsService;
+        mPresonalCarsService = personalRepository;
     }
 
     @Override
@@ -35,9 +36,9 @@ public class CarInfoPresenter implements CarInfoContracts.Presenter {
     public void deleteCarClicked() {
         AsyncRunner.runInBackground(() -> {
             try {
-                mCarRepository.delete(mCar.getId());
-                mPersonalRepository.delete(mCar.getId());
-                mView.showDeleteMessage("Deleted "+mCar.getMake()+" "+mCar.getModel()+".");
+                mCarsService.deleteCar(mCar.getId());
+                mPresonalCarsService.deleteCar(mCar.getId());
+                mView.showDeleteMessage("Deleted " + mCar.getMake() + " " + mCar.getModel() + ".");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -48,7 +49,7 @@ public class CarInfoPresenter implements CarInfoContracts.Presenter {
     public void deletePersonalCarClicked() {
         AsyncRunner.runInBackground(() -> {
             try {
-                mPersonalRepository.delete(mCar.getId());
+                mPresonalCarsService.deleteCar(mCar.getId());
                 mView.showDeleteMessage("Deleted "+mCar.getMake()+" "+mCar.getModel()+".");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,7 +61,7 @@ public class CarInfoPresenter implements CarInfoContracts.Presenter {
     public void addToPersonalClicked() {
         AsyncRunner.runInBackground(()->{
             try {
-                mPersonalRepository.add(mCar);
+                mPresonalCarsService.addCar(mCar);
                 mView.showAddMessage("Added "+mCar.getMake()+" "+mCar.getModel()+".");
             } catch (IOException e) {
                 e.printStackTrace();

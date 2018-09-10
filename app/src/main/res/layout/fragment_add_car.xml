@@ -1,0 +1,121 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.wolverine.carcatalogueandroid.views.AddCar.AddCarFragment">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/tv_make"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Make: "
+            android:textColor="@color/md_blue_300"
+            android:textSize="20dp" />
+        <EditText
+            android:id="@+id/et_make"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/tv_make"
+            android:hint="Enter the car's make..."
+            android:textColorHint="@color/md_blue_300"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/tv_model"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_make"
+            android:textColor="@color/md_blue_300"
+            android:textSize="20dp"
+            android:text="Model: "/>
+        <EditText
+            android:id="@+id/et_model"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/et_make"
+            android:layout_toRightOf="@id/tv_model"
+            android:hint="Enter the car's model..."
+            android:textColorHint="@color/md_blue_300"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/tv_cubic_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_model"
+            android:textColor="@color/md_blue_300"
+            android:textSize="20dp"
+            android:text="Cubic Capacity: "/>
+
+        <EditText
+            android:id="@+id/et_cubic_capacity"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/et_model"
+            android:layout_toRightOf="@+id/tv_cubic_capacity"
+            android:hint="Enter the car's cubic capacity(int)..."
+            android:textColorHint="@color/md_blue_300"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/tv_power"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_cubic_capacity"
+            android:textColor="@color/md_blue_300"
+            android:textSize="20dp"
+            android:text="Power: "/>
+        <EditText
+            android:id="@+id/et_power"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/tv_power"
+            android:layout_below="@+id/et_cubic_capacity"
+            android:hint="Enter the car's horsepower(int)..."
+            android:textColorHint="@color/md_blue_300"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:id="@+id/tv_image_url"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_power"
+            android:textSize="20dp"
+            android:textColor="@color/md_blue_300"
+            android:text="Image url: "/>
+
+        <EditText
+            android:id="@+id/et_image_url"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/et_power"
+            android:layout_toRightOf="@+id/tv_image_url"
+            android:hint="Enter an image URL or leave blank..."
+            android:textColorHint="@color/md_blue_300"
+            android:textSize="14sp" />
+
+        <Button
+            android:layout_marginLeft="8dp"
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/et_image_url"
+            android:layout_marginTop="25dp"
+            android:background="@color/md_blue_600"
+            android:textColor="@color/md_orange_300"
+            android:padding="5dp"/>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

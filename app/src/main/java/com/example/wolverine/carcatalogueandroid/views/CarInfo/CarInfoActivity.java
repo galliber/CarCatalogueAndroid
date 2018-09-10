@@ -9,6 +9,7 @@ import com.example.wolverine.carcatalogueandroid.AndroidApplication;
 import com.example.wolverine.carcatalogueandroid.R;
 import com.example.wolverine.carcatalogueandroid.models.Car;
 import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
+import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 import com.example.wolverine.carcatalogueandroid.views.BaseDrawerActivity;
 
 
@@ -26,9 +27,9 @@ public class CarInfoActivity extends BaseDrawerActivity {
 
         Intent intent=getIntent();
         Car car= (Car) intent.getSerializableExtra("car");
-        Repository<Car> mPersonalRepository=AndroidApplication.getPersonalCarRepository(Car.class, Car[].class);
-        Repository<Car> mRepository= AndroidApplication.getCarRepository(Car.class, Car[].class);
-        mPresenter=new CarInfoPresenter(mRepository, mPersonalRepository);
+        CarsService mPersonalCarsService=AndroidApplication.getPersonalCarsService();
+        CarsService mCarsService = AndroidApplication.getCarsService();
+        mPresenter=new CarInfoPresenter(mCarsService, mPersonalCarsService);
         mPresenter.setCar(car);
         mCarInfoFragment=new CarInfoFragment();
         mCarInfoFragment.setPresenter(mPresenter);

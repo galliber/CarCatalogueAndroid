@@ -1,39 +1,37 @@
-package com.example.wolverine.carcatalogueandroid.views.AllCars;
-
+package com.example.wolverine.carcatalogueandroid.views.MyCars;
 
 import com.example.wolverine.carcatalogueandroid.async.AsyncRunner;
 import com.example.wolverine.carcatalogueandroid.models.Car;
 import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
-import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 
 import java.io.IOException;
 import java.util.List;
 
-public class AllCarsPresenter implements AllCarsContracts.Presenter {
+public class MyCarsPresenter implements MyCarsContracts.Presenter {
 
+    private Repository<Car> mMyCarRepository;
+    private MyCarsContracts.View mView;
     private List<Car> mCars;
-    private AllCarsContracts.View mView;
-    private CarsService mCarsService;
 
-    public AllCarsPresenter(CarsService carsService){
-        this.mCarsService=carsService;
+    public MyCarsPresenter(Repository repository) {
+        mMyCarRepository = repository;
+    }
+
+
+    @Override
+    public void subscribe(MyCarsContracts.View view) {
+        mView = view;
     }
 
     @Override
-    public void subscribe(AllCarsContracts.View view) {
-        mView=view;
-    }
-
-    @Override
-    public void loadCarss() {
+    public void loadCars() {
         mView.showLoading();
-        AsyncRunner.runInBackground(()->{
+        AsyncRunner.runInBackground(() -> {
             try {
-                mCars=mCarsService.getAllCars();
-                if(mCars.isEmpty()){
+                mCars = mMyCarRepository.getAll();
+                if (mCars.isEmpty()) {
                     mView.showEmptyCarList();
-                }
-                else {
+                } else {
                     mView.showCars(mCars);
                 }
             } catch (IOException e) {

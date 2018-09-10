@@ -8,28 +8,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class HttpCarsService implements CarsService {
-    private final Repository<Car> mCarsRepository;
 
-    public HttpCarsService(Repository<Car> carsRepository) {
-        mCarsRepository = carsRepository;
+    private Repository<Car> mRepository;
+
+    public HttpCarsService(Repository<Car> repository){
+        this.mRepository=repository;
     }
 
     @Override
     public List<Car> getAllCars() throws IOException {
-        return mCarsRepository.getAll();
+        return mRepository.getAll();
     }
 
     @Override
-    public Car getDetailsById(int id) throws IOException {
-        return mCarsRepository.getById(id);
+    public Car getInfoById(int id) throws IOException {
+        return mRepository.getById(id);
     }
 
     @Override
-    public List<Car> getFilteredCars(String pattern) throws IOException {
-        String patternToLower = pattern.toLowerCase();
+    public void addCar(Car car) throws IOException {
+        mRepository.add(car);
+    }
 
-        return getAllCars().stream()
-                .filter(car -> car.getMake().toLowerCase().contains(patternToLower))
-                .collect(Collectors.toList());
+    @Override
+    public void deleteCar(int id) throws IOException {
+        mRepository.delete(id);
     }
 }

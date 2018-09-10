@@ -3,11 +3,14 @@ package com.example.wolverine.carcatalogueandroid;
 
 import com.example.wolverine.carcatalogueandroid.http.HttpRequester;
 import com.example.wolverine.carcatalogueandroid.http.OkHttpHttpRequester;
+import com.example.wolverine.carcatalogueandroid.models.Car;
 import com.example.wolverine.carcatalogueandroid.parsers.Base.JsonParser;
 import com.example.wolverine.carcatalogueandroid.parsers.GsonParser;
 import com.example.wolverine.carcatalogueandroid.repositories.CarHttpRepository;
 import com.example.wolverine.carcatalogueandroid.repositories.PersonalCarHttpRepository;
 import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
+import com.example.wolverine.carcatalogueandroid.services.HttpCarsService;
+import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +20,8 @@ public class AndroidApplication {
     private static Map<String, JsonParser> jsonParserMap;
     private static Repository personalRepository;
     private static HttpRequester httpRequester;
+    private static CarsService carsService;
+    private static CarsService personalCarsService;
 
     static {
         repositoryMap=new HashMap<>();
@@ -45,7 +50,19 @@ public class AndroidApplication {
         return personalRepository;
     }
 
+    public static CarsService getCarsService(){
+        if(carsService==null){
+            carsService=new HttpCarsService(getCarRepository(Car.class, Car[].class));
+        }
+        return carsService;
+    }
 
+    public static CarsService getPersonalCarsService(){
+        if(personalCarsService==null){
+            personalCarsService=new HttpCarsService(getPersonalCarRepository(Car.class, Car[].class));
+        }
+        return personalCarsService;
+    }
 
     private static String getServerBaseUrl() {
         return Constants.SERVER_URL;
