@@ -1,7 +1,6 @@
 package com.example.wolverine.carcatalogueandroid.views.MyCars;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wolverine.carcatalogueandroid.R;
@@ -20,20 +18,31 @@ import com.example.wolverine.carcatalogueandroid.models.Car;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnItemClick;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyCarsFragment extends Fragment implements AdapterView.OnItemClickListener, MyCarsContracts.View {
+public class MyCarsFragment extends Fragment implements MyCarsContracts.View {
 
 
     private MyCarsContracts.Presenter mPresenter;
-    private ListView mCarsListView;
-    private ProgressBar mLoading;
-    private ArrayAdapter<String> mAdapter;
+
+    @BindView(R.id.lv_cars)
+    ListView mCarsListView;
+    @BindView(R.id.loading)
+    ProgressBar mLoading;
+    @Inject
+    ArrayAdapter<String> mAdapter;
     private List<Car> mCars;
     private MyCarsContracts.Navigator mNavigator;
 
+    @Inject
     public MyCarsFragment() {
         // Required empty public constructor
     }
@@ -42,21 +51,11 @@ public class MyCarsFragment extends Fragment implements AdapterView.OnItemClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_cars, container, false);
-        mCarsListView = view.findViewById(R.id.lv_cars);
-        mLoading = view.findViewById(R.id.loading);
-        mAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1) {
-            @Override
-            public View getView(int position, View contentView, ViewGroup viewGroup) {
-                View view1 = super.getView(position, contentView, viewGroup);
-                TextView tv = view1.findViewById(android.R.id.text1);
-                tv.setTextColor(Color.GREEN);
-                return view1;
-            }
-        };
+
+        ButterKnife.bind(this, view);
+
         mCarsListView.setAdapter(mAdapter);
-        mCarsListView.setOnItemClickListener(this);
         return view;
     }
 
@@ -133,7 +132,7 @@ public class MyCarsFragment extends Fragment implements AdapterView.OnItemClickL
         getActivity().runOnUiThread(action);
     }
 
-    @Override
+    @OnItemClick(R.id.lv_cars)
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPresenter.selectCar(position);
     }

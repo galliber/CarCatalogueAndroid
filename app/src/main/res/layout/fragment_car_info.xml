@@ -89,7 +89,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/btn_delete_from_all"
-            android:background="@color/md_black_1000"/>
+            android:background="@color/md_black_1000"
+            android:padding="10dp"/>
 
     </RelativeLayout>
 

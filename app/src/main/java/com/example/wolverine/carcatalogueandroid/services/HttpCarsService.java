@@ -5,9 +5,9 @@ import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HttpCarsService implements CarsService {
+
 
     private Repository<Car> mRepository;
 

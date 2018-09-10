@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 public class CarsArrayAdapter extends ArrayAdapter<String> {
+    @Inject
     public CarsArrayAdapter(@NonNull Context context, int resource) {
         super(context, resource);
     }

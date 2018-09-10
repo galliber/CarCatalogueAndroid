@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.wolverine.carcatalogueandroid.R;
 
+import javax.inject.Inject;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +22,7 @@ public class AddCarFragment extends Fragment implements AddCarContracts.View {
 
     private AddCarContracts.Presenter mPresenter;
 
+    @Inject
     public AddCarFragment() {
         // Required empty public constructor
     }
@@ -28,7 +31,6 @@ public class AddCarFragment extends Fragment implements AddCarContracts.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_car, container, false);
 
         EditText mMake=view.findViewById(R.id.et_make);
@@ -54,7 +56,6 @@ public class AddCarFragment extends Fragment implements AddCarContracts.View {
     public void onResume(){
         super.onResume();
         mPresenter.subscribe(this);
-        mPresenter.loadContent();
 
     }
 

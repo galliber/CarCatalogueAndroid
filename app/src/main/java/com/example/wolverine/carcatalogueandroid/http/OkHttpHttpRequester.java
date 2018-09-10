@@ -10,6 +10,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OkHttpHttpRequester implements HttpRequester {
+    public OkHttpHttpRequester(){
+
+    }
 
     @Override
     public String get(String url) throws IOException {

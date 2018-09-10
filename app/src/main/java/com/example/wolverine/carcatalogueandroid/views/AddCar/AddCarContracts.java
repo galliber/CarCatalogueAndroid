@@ -10,6 +10,5 @@ public interface AddCarContracts {
         void subscribe(View view);
         void addClicked(String s, String toString, String string, String s1, String toString1);
 
-        void loadContent();
     }
 }

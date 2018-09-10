@@ -1,7 +1,6 @@
 package com.example.wolverine.carcatalogueandroid.views;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -16,15 +15,17 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-public abstract class BaseDrawerActivity extends AppCompatActivity {
+import dagger.android.support.DaggerAppCompatActivity;
+
+public abstract class BaseDrawerActivity extends DaggerAppCompatActivity {
+    public BaseDrawerActivity(){
+
+    }
     private void setupDrawer() {
-        //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem allCarsItem = new PrimaryDrawerItem().withIdentifier(AllCarsActivity.IDENTIFIER).withIcon(R.drawable.material_drawer_circle_mask).withName("All Cars");
         PrimaryDrawerItem myCarsItem = new PrimaryDrawerItem().withIdentifier(MyCarsActivity.IDENTIFIER).withIcon(R.drawable.material_drawer_circle_mask).withName("My Cars");
         PrimaryDrawerItem addCarItem= new PrimaryDrawerItem().withIdentifier(AddCarActivity.IDENTIFIER).withIcon(R.drawable.material_drawer_circle_mask).withName("Add Car");
 
-
-//create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(getDrawerToolbar())
@@ -53,7 +54,7 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
     public abstract Toolbar getDrawerToolbar();
     public abstract long getIdentifier();
     void navigate(long n){
-        if(n== AllCarsActivity.IDENTIFIER){
+        if(n==AllCarsActivity.IDENTIFIER){
             Intent intent=new Intent(this, AllCarsActivity.class);
             startActivity(intent);
         }
@@ -61,7 +62,7 @@ public abstract class BaseDrawerActivity extends AppCompatActivity {
             Intent intent=new Intent(this, MyCarsActivity.class);
             startActivity(intent);
         }
-        else if(n== AddCarActivity.IDENTIFIER){
+        else if(n==AddCarActivity.IDENTIFIER){
             Intent intent=new Intent(this, AddCarActivity.class);
             startActivity(intent);
         }

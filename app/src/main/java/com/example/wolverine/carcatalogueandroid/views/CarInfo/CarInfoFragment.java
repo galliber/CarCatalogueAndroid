@@ -17,24 +17,48 @@ import com.bumptech.glide.Glide;
 import com.example.wolverine.carcatalogueandroid.R;
 import com.example.wolverine.carcatalogueandroid.models.Car;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CarInfoFragment extends Fragment implements CarInfoContracts.View {
 
+    @BindView(R.id.tv_make)
+    TextView mTvMake;
 
-    private TextView mTvMake;
-    private TextView mTvModel;
-    private TextView mTvPower;
-    private TextView mTvCubicCapacity;
-    private Button mBtnAddToPersonal;
-    private Button mBtnDeleteFromPersonal;
-    private Button mBtnDeleteFromAll;
-    private ImageView mImImage;
-    private RelativeLayout mContent;
-    private ProgressBar mLoading;
+    @BindView(R.id.tv_model)
+    TextView mTvModel;
+
+    @BindView(R.id.tv_power)
+    TextView mTvPower;
+
+    @BindView(R.id.tv_cubic_capacity)
+    TextView mTvCubicCapacity;
+
+    @BindView(R.id.btn_add_to_personal)
+    Button mBtnAddToPersonal;
+
+    @BindView(R.id.btn_delete_from_personal)
+    Button mBtnDeleteFromPersonal;
+
+    @BindView(R.id.btn_delete_from_all)
+    Button mBtnDeleteFromAll;
+
+    @BindView(R.id.im_image)
+    ImageView mImImage;
+
+    @BindView(R.id.content)
+    RelativeLayout mContent;
+
+    @BindView(R.id.loading)
+    ProgressBar mLoading;
     private CarInfoContracts.Presenter mPresenter;
 
+    @Inject
     public CarInfoFragment() {
         // Required empty public constructor
     }
@@ -45,25 +69,18 @@ public class CarInfoFragment extends Fragment implements CarInfoContracts.View {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_car_info, container, false);
 
-        mContent = view.findViewById(R.id.content);
-        mLoading = view.findViewById(R.id.loading);
-        mTvMake = view.findViewById(R.id.tv_make);
-        mTvModel = view.findViewById(R.id.tv_model);
-        mTvPower = view.findViewById(R.id.tv_power);
-        mImImage=view.findViewById(R.id.im_image);
-        mTvCubicCapacity = view.findViewById(R.id.tv_cubic_capacity);
-        mBtnAddToPersonal = view.findViewById(R.id.btn_add_to_personal);
+        ButterKnife.bind(this, view);
+
         mBtnAddToPersonal.setText("Add to personal.");
         mBtnAddToPersonal.setOnClickListener((item) -> {
             mPresenter.addToPersonalClicked();
         });
 
-        mBtnDeleteFromPersonal = view.findViewById(R.id.btn_delete_from_personal);
         mBtnDeleteFromPersonal.setText("Delete from Personal.");
         mBtnDeleteFromPersonal.setOnClickListener((item) -> {
             mPresenter.deletePersonalCarClicked();
         });
-        mBtnDeleteFromAll = view.findViewById(R.id.btn_delete_from_all);
+
         mBtnDeleteFromAll.setText("Delete Car.");
         mBtnDeleteFromAll.setOnClickListener((item) -> {
             mPresenter.deleteCarClicked();
@@ -129,5 +146,4 @@ public class CarInfoFragment extends Fragment implements CarInfoContracts.View {
     public void runOnUI(Runnable action) {
         getActivity().runOnUiThread(action);
     }
-
 }

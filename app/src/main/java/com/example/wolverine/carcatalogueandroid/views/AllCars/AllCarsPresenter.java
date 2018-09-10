@@ -3,20 +3,25 @@ package com.example.wolverine.carcatalogueandroid.views.AllCars;
 
 import com.example.wolverine.carcatalogueandroid.async.AsyncRunner;
 import com.example.wolverine.carcatalogueandroid.models.Car;
-import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
 import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public class AllCarsPresenter implements AllCarsContracts.Presenter {
 
+    private final AsyncRunner mAsyncRunner;
     private List<Car> mCars;
     private AllCarsContracts.View mView;
     private CarsService mCarsService;
 
-    public AllCarsPresenter(CarsService carsService){
+    @Inject
+    public AllCarsPresenter(@Named("all") CarsService carsService, AsyncRunner asyncRunner){
         this.mCarsService=carsService;
+        mAsyncRunner=asyncRunner;
     }
 
     @Override
@@ -27,7 +32,7 @@ public class AllCarsPresenter implements AllCarsContracts.Presenter {
     @Override
     public void loadCarss() {
         mView.showLoading();
-        AsyncRunner.runInBackground(()->{
+        mAsyncRunner.runInBackground(()->{
             try {
                 mCars=mCarsService.getAllCars();
                 if(mCars.isEmpty()){

@@ -5,31 +5,41 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.example.wolverine.carcatalogueandroid.AndroidApplication;
 import com.example.wolverine.carcatalogueandroid.R;
 import com.example.wolverine.carcatalogueandroid.models.Car;
-import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
 import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 import com.example.wolverine.carcatalogueandroid.views.BaseDrawerActivity;
 import com.example.wolverine.carcatalogueandroid.views.CarInfo.CarInfoActivity;
 
-public class AllCarsActivity extends BaseDrawerActivity implements AllCarsContracts.Navigator{
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class AllCarsActivity extends BaseDrawerActivity implements AllCarsContracts.Navigator {
 
     public static final long IDENTIFIER = 0;
-    private AllCarsFragment mAllCarsFragment;
-    private AllCarsPresenter mPresenter;
+
+
+    @Inject
+    AllCarsFragment mAllCarsFragment;
+
+
+    @Inject
+    AllCarsPresenter mPresenter;
+
     private CarsService mCarsService;
 
-    private Toolbar mDrawer;
+    @BindView(R.id.tb_drawer)
+    Toolbar mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_cars);
 
-        mCarsService= AndroidApplication.getCarsService();
-        mPresenter=new AllCarsPresenter(mCarsService);
-        mAllCarsFragment=new AllCarsFragment();
+        ButterKnife.bind(this);
+
         mAllCarsFragment.setNavigator(this);
         mAllCarsFragment.setPresenter(mPresenter);
 
@@ -37,7 +47,6 @@ public class AllCarsActivity extends BaseDrawerActivity implements AllCarsContra
         getFragmentManager().beginTransaction().replace(R.id.content, mAllCarsFragment).commit();
 
 
-        mDrawer=findViewById(R.id.tb_drawer);
     }
 
     @Override
@@ -56,5 +65,4 @@ public class AllCarsActivity extends BaseDrawerActivity implements AllCarsContra
         intent.putExtra("car", car);
         startActivity(intent);
     }
-
 }

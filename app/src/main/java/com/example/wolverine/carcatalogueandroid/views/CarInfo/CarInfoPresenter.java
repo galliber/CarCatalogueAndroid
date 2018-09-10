@@ -2,20 +2,26 @@ package com.example.wolverine.carcatalogueandroid.views.CarInfo;
 
 import com.example.wolverine.carcatalogueandroid.async.AsyncRunner;
 import com.example.wolverine.carcatalogueandroid.models.Car;
-import com.example.wolverine.carcatalogueandroid.repositories.base.Repository;
 import com.example.wolverine.carcatalogueandroid.services.base.CarsService;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public class CarInfoPresenter implements CarInfoContracts.Presenter {
+
     private final CarsService mCarsService;
     private final CarsService mPresonalCarsService;
+    private final AsyncRunner mAsyncRunner;
     private CarInfoContracts.View mView;
     private Car mCar;
 
-    public CarInfoPresenter(CarsService carsService, CarsService personalRepository) {
+    @Inject
+    public CarInfoPresenter(@Named("all") CarsService carsService, @Named("personal") CarsService personalCarService, AsyncRunner asyncRunner) {
         mCarsService = carsService;
-        mPresonalCarsService = personalRepository;
+        mPresonalCarsService = personalCarService;
+        mAsyncRunner = asyncRunner;
     }
 
     @Override
@@ -26,7 +32,7 @@ public class CarInfoPresenter implements CarInfoContracts.Presenter {
     @Override
     public void loadCar() {
         mView.showLoading();
-        AsyncRunner.runInBackground(() -> {
+        mAsyncRunner.runInBackground(() -> {
             mView.showCar(mCar);
             mView.hideLoading();
         });
@@ -34,7 +40,7 @@ public class CarInfoPresenter implements CarInfoContracts.Presenter {
 
     @Override
     public void deleteCarClicked() {
-        AsyncRunner.runInBackground(() -> {
+        mAsyncRunner.runInBackground(() -> {
             try {
                 mCarsService.deleteCar(mCar.getId());
                 mPresonalCarsService.deleteCar(mCar.getId());
@@ -47,10 +53,10 @@ public class CarInfoPresenter implements CarInfoContracts.Presenter {
 
     @Override
     public void deletePersonalCarClicked() {
-        AsyncRunner.runInBackground(() -> {
+        mAsyncRunner.runInBackground(() -> {
             try {
                 mPresonalCarsService.deleteCar(mCar.getId());
-                mView.showDeleteMessage("Deleted "+mCar.getMake()+" "+mCar.getModel()+".");
+                mView.showDeleteMessage("Deleted " + mCar.getMake() + " " + mCar.getModel() + ".");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -59,10 +65,10 @@ public class CarInfoPresenter implements CarInfoContracts.Presenter {
 
     @Override
     public void addToPersonalClicked() {
-        AsyncRunner.runInBackground(()->{
+        mAsyncRunner.runInBackground(() -> {
             try {
                 mPresonalCarsService.addCar(mCar);
-                mView.showAddMessage("Added "+mCar.getMake()+" "+mCar.getModel()+".");
+                mView.showAddMessage("Added " + mCar.getMake() + " " + mCar.getModel() + ".");
             } catch (IOException e) {
                 e.printStackTrace();
             }

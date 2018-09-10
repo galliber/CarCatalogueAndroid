@@ -21,19 +21,30 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnItemClick;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AllCarsFragment extends Fragment implements AdapterView.OnItemClickListener, AllCarsContracts.View {
+public class AllCarsFragment extends Fragment implements AllCarsContracts.View {
 
+    @BindView(R.id.lv_cars)
+    ListView mCarsListView;
 
-    private ListView mCarsListView;
-    private ProgressBar mLoadingBar;
-    private ArrayAdapter<String> mAdapter;
+    @BindView((R.id.loading))
+    ProgressBar mLoadingBar;
+
+    @Inject
+    ArrayAdapter<String> mAdapter;
     private List<Car> mCars;
     private AllCarsContracts.Navigator mNavigator;
     private AllCarsContracts.Presenter mPresenter;
 
+    @Inject
     public AllCarsFragment() {
         // Required empty public constructor
     }
@@ -42,17 +53,15 @@ public class AllCarsFragment extends Fragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_cars, container, false);
-        mCarsListView = view.findViewById(R.id.lv_cars);
-        mLoadingBar = view.findViewById(R.id.loading);
-        mAdapter = new CarsArrayAdapter(getContext(), android.R.layout.simple_list_item_1);
+
+        ButterKnife.bind(this, view);
+
         mCarsListView.setAdapter(mAdapter);
-        mCarsListView.setOnItemClickListener(this);
         return view;
     }
 
-    @Override
+    @OnItemClick({R.id.lv_cars})
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPresenter.selectCar(position);
     }
